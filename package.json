@@ -1,5 +1,5 @@
 {
-  "name": "astroreha",
+  "name": "astroreha-modified",
   "version": "1.1.5",
   "description": "Astrology Library to get Birth Chart and Navamsa Chart. Compatibility retrieval using the same.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rish-0-0/astroreha.git"
+    "url": "git+https://github.com/chethankumar/astroreha.git"
   },
   "keywords": [
     "Swiss",
@@ -19,15 +19,15 @@
     "Navamsa Chart",
     "Reha"
   ],
-  "author": "Rishabh Anand",
+  "author": "ChethanKumar",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/rish-0-0/astroreha/issues"
+    "url": "https://github.com/chethankumar/astroreha/issues"
   },
-  "homepage": "https://github.com/rish-0-0/astroreha#readme",
+  "homepage": "https://github.com/chethankumar/astroreha#readme",
   "dependencies": {
     "ephemeris": "^2.0.0",
-    "jyotish": "^1.0.1",
+    "jyotish-modified": "^1.0.1",
     "swisseph": "^0.5.14"
   }
 }
