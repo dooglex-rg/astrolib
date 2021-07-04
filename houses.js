@@ -1,5 +1,5 @@
 const swisseph = require("swisseph");
-const { getValidatedBirthDetails } = require("jyotish").utils.birthDetails;
+const { getValidatedBirthDetails } = require("jyotish-modified").utils.birthDetails;
 /**
  * 
  * @typedef {Object} BirthDetails
