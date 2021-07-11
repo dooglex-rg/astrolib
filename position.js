@@ -50,12 +50,7 @@ function getJulianDay(date) {
  */
 
 function getAllPlanets(dateString, longitude, latitude, height) {
-  return ephemeris.getAllPlanets(
-    new Date(dateString),
-    longitude,
-    latitude,
-    height
-  );
+  return ephemeris.getAllPlanets(new Date(dateString), longitude, latitude, height);
 }
 
 /*
@@ -74,7 +69,7 @@ function getBirthChart(dateString, timeString, lat, lng, timezone) {
   // console.log(calculateHouses({ dateString, timeString, lat, lng, timezone }));
   const grahaPositions = jyotish.grahas.getGrahasPosition(
     { dateString, timeString, lat, lng, timezone },
-    { zodiacType: "S", houseType: "W" }
+    { zodiacType: "S", houseType: "P" }
   );
 
   const birthChart = {
@@ -210,21 +205,19 @@ function getNavamsaChart(birthChart) {
       // metadata of birthchart should not be iterated. It won't be a rashi, it will be a graha inside metadata
       return;
     }
-    rashi.signs.map((grah) => {  
+    rashi.signs.map((grah) => {
       const graha = JSON.parse(JSON.stringify(grah));
       const navamsa = whichNavamsa(graha.longitude); // A number between 1 - 9
-      const navamsa_group_member =
-        constants.REVERSE_RASHIS[
-          constants.NAVAMSHA_GROUPS[rashi.rashi]
-        ];
+      const navamsa_group_member = constants.REVERSE_RASHIS[constants.NAVAMSHA_GROUPS[rashi.rashi]];
       const position = constants.RASHI_MAP[navamsa_group_member] + 1;
-      const calculated_navamsa_rashi_position = (position + navamsa - 1 )%12;
+      const calculated_navamsa_rashi_position = (position + navamsa - 1) % 12;
       const navamsa_rashi = constants.SKEWED_REVERSE_RASHI_MAP[calculated_navamsa_rashi_position];
       //calculting degree
-      
-      const reamining_nakshatra = (graha.longitude / (40/3)) % 1;
-      const reamining_nakshatra_pad=(reamining_nakshatra*(40/3)) % (30/9);
-      const full_degree = ((calculated_navamsa_rashi_position-1) * 30 )+ (reamining_nakshatra_pad * 9);
+
+      const reamining_nakshatra = (graha.longitude / (40 / 3)) % 1;
+      const reamining_nakshatra_pad = (reamining_nakshatra * (40 / 3)) % (30 / 9);
+      const full_degree =
+        (calculated_navamsa_rashi_position - 1) * 30 + (reamining_nakshatra_pad * 9);
       graha.longitude = full_degree;
 
       navamsaChart[constants.RASHIS[navamsa_rashi]].signs.push(graha);

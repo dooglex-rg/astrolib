@@ -1,7 +1,7 @@
 const swisseph = require("swisseph");
 const { getValidatedBirthDetails } = require("jyotish-modified").utils.birthDetails;
 /**
- * 
+ *
  * @typedef {Object} BirthDetails
  * @property {String} dateString - Format: YYYY-MM-DD
  * @property {String} timeString - Format: HH:mm:ss
@@ -11,8 +11,8 @@ const { getValidatedBirthDetails } = require("jyotish-modified").utils.birthDeta
  */
 
 /**
- * 
- * @param {BirthDetails} birthDetails 
+ *
+ * @param {BirthDetails} birthDetails
  */
 const convertTime = (birthDetails) => {
   let utc = swisseph.swe_utc_time_zone(
@@ -39,12 +39,12 @@ const convertTime = (birthDetails) => {
 };
 
 /**
- * 
+ *
  * @param {BirthDetails} birthDetails birth details
- * @param {String} house_type House System. Default: "Whole Sign" = "W" 
+ * @param {String} house_type House System. Default: "Whole Sign" = "W"
  */
 
-function calculateHouses(birthDetails, house_type = "W") {
+function calculateHouses(birthDetails, house_type = "P") {
   const { tt } = convertTime(getValidatedBirthDetails(birthDetails));
   return swisseph.swe_houses_ex(
     tt,
