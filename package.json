@@ -1,6 +1,6 @@
 {
   "name": "astroreha-modified",
-  "version": "1.1.8",
+  "version": "1.8.0",
   "description": "Astrology Library to get Birth Chart and Navamsa Chart. Compatibility retrieval using the same.",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/chethankumar/astroreha#readme",
   "dependencies": {
     "ephemeris": "^2.0.0",
-    "jyotish-modified": "^1.0.1",
+    "jyotish-modified": "^1.1.8",
     "swisseph": "^0.5.14"
   }
 }
