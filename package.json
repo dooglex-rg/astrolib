@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/chethankumar/astroreha#readme",
   "dependencies": {
-    "ephemeris": "^2.0.0",
-    "jyotish-modified": "^1.1.8",
+    "ephemeris" : "github:dooglex-rg/ephemeris",
+    "jyotish-modified": "github:dooglex-rg/jyotish",
     "swisseph": "^0.5.14"
   }
 }
