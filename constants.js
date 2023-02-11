@@ -360,7 +360,7 @@ module.exports.OPPOSITE_SIGNS = {
 module.exports.GOOD_CONNECTION_TYPES = [1, 3, 5, 7, 9, 11];
 module.exports.BAD_CONNECTION_TYPES = [2, 4, 6, 8, 10, 12];
 
-module.exports.MANGLIK = [1, 4, 7, 8, 12];
+module.exports.MANGLIK = [1, 2, 4, 7, 8, 12];
 
 module.exports.swisseph = swisseph;
 
