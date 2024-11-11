@@ -42,11 +42,11 @@ function areCompatibile(
   const person1NavamsaChart = getNavamsaChart(person1BirthChart);
   const person2NavamsaChart = getNavamsaChart(person2BirthChart);
 
-  const person1BirthChartHouses = getHousesOfChart(person1BirthChart);
-  const person2BirthChartHouses = getHousesOfChart(person2BirthChart);
+  // const person1BirthChartHouses = getHousesOfChart(person1BirthChart);
+  // const person2BirthChartHouses = getHousesOfChart(person2BirthChart);
 
-  const person1NavamsaChartHouses = getHousesOfChart(person1NavamsaChart);
-  const person2NavamsaChartHouses = getHousesOfChart(person2NavamsaChart);
+  // const person1NavamsaChartHouses = getHousesOfChart(person1NavamsaChart);
+  // const person2NavamsaChartHouses = getHousesOfChart(person2NavamsaChart);
   let total_score = 0;
 
   let D9_p1N_p2B_match = seventhHouseOfD9Check(
@@ -94,7 +94,7 @@ function areCompatibile(
 
   total_score += Number(
     person1BirthChart.meta.Mo.rashi === person2BirthChart.meta.Su.rashi ||
-      person1BirthChart.meta.Su.rashi === person2BirthChart.meta.Mo.rashi
+    person1BirthChart.meta.Su.rashi === person2BirthChart.meta.Mo.rashi
   );
 
   // Sun to Sun connection
@@ -249,7 +249,6 @@ function getCompatibilityScore(
   person2,
   threshold = constants.DEFAULT_THRESHOLD
 ) {
-  const interim = [];
   const person1BirthChart = getBirthChart(
     person1.dateString,
     person1.timeString,
@@ -264,14 +263,49 @@ function getCompatibilityScore(
     person2.lng,
     person2.timezone
   );
+
+  return getCompatibilityScoreBase(person1BirthChart, person2BirthChart, threshold)
+
+}
+
+function getCompatibilityScores(baseDate, comparedPersons) {
+  const baseDateBirthChart = getBirthChart(
+    baseDate.dateString,
+    baseDate.timeString,
+    baseDate.lat,
+    baseDate.lng,
+    baseDate.timezone
+  );
+
+  comparedPersons.forEach((person2) => {
+    const person2BirthChart = getBirthChart(
+      person2.dateString,
+      person2.timeString,
+      person2.lat,
+      person2.lng,
+      person2.timezone
+    );
+    person2.score = getCompatibilityScoreBase(baseDateBirthChart, person2BirthChart, constants.DEFAULT_THRESHOLD).total_score
+
+  })
+  return comparedPersons
+}
+
+
+function getCompatibilityScoreBase(
+  person1BirthChart,
+  person2BirthChart,
+  threshold = constants.DEFAULT_THRESHOLD
+) {
+  const interim = [];
   const person1NavamsaChart = getNavamsaChart(person1BirthChart);
   const person2NavamsaChart = getNavamsaChart(person2BirthChart);
 
-  const person1BirthChartHouses = getHousesOfChart(person1BirthChart);
-  const person2BirthChartHouses = getHousesOfChart(person2BirthChart);
+  // const person1BirthChartHouses = getHousesOfChart(person1BirthChart);
+  // const person2BirthChartHouses = getHousesOfChart(person2BirthChart);
 
-  const person1NavamsaChartHouses = getHousesOfChart(person1NavamsaChart);
-  const person2NavamsaChartHouses = getHousesOfChart(person2NavamsaChart);
+  // const person1NavamsaChartHouses = getHousesOfChart(person1NavamsaChart);
+  // const person2NavamsaChartHouses = getHousesOfChart(person2NavamsaChart);
   let total_score = 0;
 
   let D9_p1N_p2B_match = seventhHouseOfD9Check(
@@ -330,7 +364,7 @@ function getCompatibilityScore(
 
   total_score += Number(
     person1BirthChart.meta.Mo.rashi === person2BirthChart.meta.Su.rashi ||
-      person1BirthChart.meta.Su.rashi === person2BirthChart.meta.Mo.rashi
+    person1BirthChart.meta.Su.rashi === person2BirthChart.meta.Mo.rashi
   );
   interim.push({
     after_score: total_score,
@@ -580,22 +614,22 @@ function oppositeSignOfBirthCheck(birthChart1, birthChart2) {
   // First Person's rising, sun or moon signs
   if (
     constants.RASHIS[birthChart1.meta.La.rashi] ===
-      oppositeSignOfRulingLordSignSecondPerson ||
+    oppositeSignOfRulingLordSignSecondPerson ||
     constants.RASHIS[birthChart1.meta.Su.rashi] ===
-      oppositeSignOfRulingLordSignSecondPerson ||
+    oppositeSignOfRulingLordSignSecondPerson ||
     constants.RASHIS[birthChart1.meta.Mo.rashi] ===
-      oppositeSignOfRulingLordSignSecondPerson
+    oppositeSignOfRulingLordSignSecondPerson
   ) {
     total_score += 2;
   }
 
   if (
     constants.RASHIS[birthChart2.meta.La.rashi] ===
-      oppositeSignOfRulingLordSignFirstPerson ||
+    oppositeSignOfRulingLordSignFirstPerson ||
     constants.RASHIS[birthChart2.meta.Su.rashi] ===
-      oppositeSignOfRulingLordSignFirstPerson ||
+    oppositeSignOfRulingLordSignFirstPerson ||
     constants.RASHIS[birthChart2.meta.Mo.rashi] ===
-      oppositeSignOfRulingLordSignFirstPerson
+    oppositeSignOfRulingLordSignFirstPerson
   ) {
     total_score += 2;
   }
@@ -673,7 +707,7 @@ function planetConjunctHouse(birthChart1, birthChart2, planet, house) {
 
   return Number(
     person1ReverseHouses[birthChart2.meta[planet].rashi] == house ||
-      person2ReverseHouses[birthChart1.meta[planet].rashi] == house
+    person2ReverseHouses[birthChart1.meta[planet].rashi] == house
   );
 }
 
@@ -734,4 +768,5 @@ module.exports = {
   getCompatibilityScore,
   calculateNakshatra,
   calculateNakshatraCompatibility,
+  getCompatibilityScores,
 };
