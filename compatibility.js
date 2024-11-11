@@ -277,7 +277,7 @@ function getCompatibilityScores(baseDate, comparedPersons) {
     baseDate.timezone
   );
 
-  comparedPersons.forEach((person2) => {
+  const scores = comparedPersons.map((person2) => {
     const person2BirthChart = getBirthChart(
       person2.dateString,
       person2.timeString,
@@ -285,10 +285,10 @@ function getCompatibilityScores(baseDate, comparedPersons) {
       person2.lng,
       person2.timezone
     );
-    person2.score = getCompatibilityScoreBase(baseDateBirthChart, person2BirthChart, constants.DEFAULT_THRESHOLD).total_score
-
+    const score = getCompatibilityScoreBase(baseDateBirthChart, person2BirthChart, constants.DEFAULT_THRESHOLD)
+    return { label: person2.dateString + person2.timeString, score: score.total_score }
   })
-  return comparedPersons
+  return scores
 }
 
 
